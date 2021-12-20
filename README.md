@@ -16,9 +16,9 @@ Enable the app by adding it to your ```INSTALLED_APPS``` list in your project's 
 
 ```python
 INSTALLED_APPS = [
-	...,
-	'watchlist'
-	...,
+    ...,
+    'watchlist'
+    ...,
 ]
 ``` 
 
@@ -109,7 +109,7 @@ The exporters expect these fields to be present (for a full list of expected fie
 
 ```json
 {
-	// FieldName : Explanation
+    // FieldName : Explanation
     "author": "author of a work",
     "editor": "editor of a work",
     "contributor": "contributor to a work",
@@ -143,14 +143,14 @@ We offer two tags for making a bookmark: One for usage with Wagtail CMS pages, a
 {% load watchlist_tags %}
 
 <html>
-	...
+    ...
 
-	<body>
-		...
+    <body>
+        ...
 
-		{# Bookmark for a Wagtail Page #}
+        {# Bookmark for a Wagtail Page #}
 
-		{% if user.is_authenticated%}
+        {% if user.is_authenticated%}
             {% bookmark page.full_url page.id user %}
         {% else %}
             {% bookmark page.full_url page.id %}
@@ -159,13 +159,13 @@ We offer two tags for making a bookmark: One for usage with Wagtail CMS pages, a
         {# Bookmark for a non-Wagtail Page #}
 
         {% if user.is_authenticated%}
-			{% bookmark_nopage document.uri user=user %}
-		{% else %}
-         	{% bookmark_nopage document.uri %}
-       	{% endif %}
+            {% bookmark_nopage document.uri user=user %}
+        {% else %}
+            {% bookmark_nopage document.uri %}
+        {% endif %}
 
-		...
-	</body>
+        ...
+    </body>
 </html>
 ```
 
@@ -179,16 +179,16 @@ A user's watchlist can be inserted in any template (preferably a profile page), 
 {% load watchlist_tags %}
 
 <html>
-	...
+    ...
 
-	<body>
-		...
+    <body>
+        ...
 
-		{# Place user's watchlist here #}
-		{% get_watchlist user %}
+        {# Place user's watchlist here #}
+        {% get_watchlist user %}
 
-		...
-	</body>
+        ...
+    </body>
 </html>
 ```
 
