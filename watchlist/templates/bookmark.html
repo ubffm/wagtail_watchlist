@@ -1,0 +1,9 @@
+    {% if bookmark_id %}
+        <div class="container position-relative">
+            <a href="{% url 'unbookmark'%}?bookmark_id={{bookmark_id}}" class="position-absolute top-0 translate-middle-x" style="left:calc(100% - 2rem) !important;"><svg version="1.1" id="Layer_1" x="0px" y="0px" width="64" height="64" viewBox="0 0 502.418 502.418" style="enable-background:new 0 0 502.418 502.418;" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><path d="M 101.791,0 V 502.418 L 251.204,387.841 400.627,502.418 V 0 Z"/></svg></a>
+        </div>
+    {% else %}
+        <div class="container position-relative">
+            <a href="{% url 'bookmark' %}?{% if page_id%}page={{page_id}}&{%endif%}uri={{uri}}" class="position-absolute top-0 translate-middle-x" style="left:calc(100% - 2rem) !important;"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="64" height="64" viewBox="0 0 502.418 502.418" style="enable-background:new 0 0 502.418 502.418;" xml:space="preserve"><path d="M101.791,0v502.418l149.413-114.577l149.423,114.577V0H101.791z M380.935,462.505l-129.731-99.481l-129.721,99.481V19.692 h259.452V462.505z"/></svg></a>
+        </div>
+    {% endif %}

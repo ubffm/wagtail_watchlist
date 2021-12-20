@@ -1,0 +1,57 @@
+<div class="offset-3 col-6">
+	<h2 class="text-center">My Bookmarks</h2>
+	<hr style="border: 1px solid #267982; opacity: 1 !important;">
+</div>
+<div class="flex-row">
+	<div class="d-flex col-12 justify-content-center">
+    	<a class="btn btn-outline-primary m-2" href="{% url 'watchlist_export'%}?format=Endnote">Export to Endnote</a>
+    	<a class="btn btn-outline-primary m-2" href="{% url 'watchlist_export'%}?format=RIS">Export to RIS</a>
+    	<a class="btn btn-outline-primary m-2" href="{% url 'watchlist_export'%}?format=BibTex">Export to BibTex</a>
+    </div>
+</div>
+<hr style="border: 1px solid #267982; opacity: 1 !important;">
+<div class="row pb-5 overflow-auto" style="max-height: 50vh;">
+	{% if watchlist %}
+		{% for item in watchlist.all %}
+			<div class="row pb-3">
+				<div class="col-12">
+					<h5><a target="_blank" href="{{item.uri}}">{{item.meta_data.title|join:', '}}</a></h5>
+					<h6>{{item.meta_data.subtitle|join:', '}}</h6>
+					Author: {{item.meta_data.author|join:', '}}<br>
+					Publisher: {{ item.meta_data.publisher|join:', ' }}<br>
+					Place Published: {{ item.meta_data.placePublishedVerbose|join:', ' }}<br>
+			        Date Published: {{ item.meta_data.datePublished|join:', ' }}<br>
+			        <form id="update-{{item.id}}" action="{% url 'watchlist_update'%}" method="POST">{% csrf_token %}
+						<div class="form-row">
+							<div class="col">
+								<input type="hidden" name="bookmark_id" value="{{item.id}}">
+								<input class="form-control" id="keywords" name="keywords" type="text" {% if item.keywords %} value="{{item.keywords}}"  {%endif%} placeholder="Keywords" aria-label="Keywords">
+								<input class="form-control" id="comments" name="comments" type="text" {% if item.comments %} value="{{item.comments}}"  {%endif%} placeholder="Comments" aria-label="Comments">
+							</div>
+						</div>
+						<div class="form-row">
+							&nbsp;
+						</div>
+						<div class="form-row">
+							<div class="col">
+			                    <button form="update-{{item.id}}" class="btn btn-primary" type="submit">Update Item</button>
+			                    <button form="del-{{item.id}}" class="btn btn-primary">Remove Item</button>
+			                </div>
+						</div>
+			        </form>
+			        <form id="del-{{item.id}}" action="{% url 'unbookmark' %}" method="GET">
+			        	<input type="hidden" name="bookmark_id" type="text" value="{{item.id}}">
+			        </form>
+				</div>
+			</div>
+			{% if not forloop.last%}
+				<hr style="border: 1px solid #267982; opacity: 1 !important;">
+			{% endif %}
+		{%endfor%}	
+	{% else %}
+
+	<h1 class="pt-5 pe-5">You don't have any bookmarks yet</h1>
+
+	{% endif %}
+</div>
+

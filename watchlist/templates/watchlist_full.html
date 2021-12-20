@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags social_share compress static%}
+
+{% block content%}
+<div class="container content-container">
+	<h1 class="pt-5 pe-5">Your watchlist is full</h1>
+
+	<p> We're terribly sorry, but you exceeded the limit of records in your watchlist (500 Entries). If you want to store new entries, please delete old entries first. </p>
+	<div class="flex-row">
+		<a class="btn btn-primary" href="{{back}}">Back</a>
+	</div>
+</div>
+{% endblock %}
